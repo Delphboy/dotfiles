@@ -8,7 +8,6 @@ choco feature enable -n=allowGlobalConfirmation
 choco install vim
 choco install git
 choco install vscode
-choco install cmder
 choco install dotnet4.5
 choco install dotnetcore-sdk
 
