@@ -57,7 +57,7 @@ code $profile
 
 function Open-GitHub {
     $repo = $(git rev-parse --show-toplevel).split('/')[-1]
-    Start-Process firefox $("https://github.com/CarFinance247/$repo")
+    Start-Process firefox $("https://github.com/Delphboy/$repo")
 }
 
 function boot{
