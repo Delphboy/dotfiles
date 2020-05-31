@@ -1,5 +1,7 @@
 # Import posh git
 Import-Module posh-git
+Import-Module oh-my-posh
+Set-Theme Paradox
 
 # My Alias'
 Set-Alias -Name stat -Value get-gitstatus
@@ -12,8 +14,9 @@ Set-Alias -Name newt -Value new-Branch
 # Linux alias
 Set-Alias -Name grep -Value findstr
 Set-Alias -Name touch -Value make
+
 #Paths
-$dev = "C:\Users\HPS19\Documents\GitHub"
+$dev = $env:dev
 
 # Create a new git branch based off master
 function new-Branch {
@@ -62,4 +65,10 @@ function Open-GitHub {
 
 function boot{
     start (get-childitem | where {$_.extension -eq ".sln"})
+}
+
+# Chocolatey profile
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if (Test-Path($ChocolateyProfile)) {
+  Import-Module "$ChocolateyProfile"
 }
