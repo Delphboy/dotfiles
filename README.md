@@ -1,17 +1,7 @@
 # dotfiles
-A collection of installation scripts and other things for making moving between computers that little bit easier
-
-## Software I use
- - Firefox
- - Spotify
- - Git
- - VSCode
+I move between operating systems quite a lot (mainly linux and windows). These are the scripts and config files I use to make the computers I'm using a little bit more homely. 
 
 ## Windows
-The Windows installation script is based off the [Chocolatey Package Manager](https://chocolatey.org/). Run `choco-install` in an admin CMD and then run `windows.bat` as admin. 
-
-## Debian Linux Distros
-TODO
-
-## Mac
-TOOD
+The Windows installation process is automated through the use of chocolatey. To start the automated setup on a fresh Windows installation:
+1. Open CMD as Administrator
+2. Run ``
