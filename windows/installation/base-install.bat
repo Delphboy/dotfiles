@@ -2,6 +2,21 @@
 
 cd %HOMEPATH%
 
+REM Configure Git (it is installed by choco-install.bat)
+git config --global user.name "Henry Senior"
+set /p email="Enter git email: "
+git config --global user.email %email%
+
+REM Configure dev variable
+set /p DevPath="Enter path to be used for dev"
+IF EXIST %DevPath% (
+setx dev %DevPath%
+) ELSE (
+mkdir %DevPath%
+setx dev %DevPath%
+choco install microsoft-windows-terminal
+)
+
 REM Allow global confirmation, so we don't need to confirm each item we're installing
 choco feature enable -n=allowGlobalConfirmation
 
@@ -31,10 +46,18 @@ choco install vscode
 choco install notepadplusplus.install
 choco install dotnet4.5
 choco install dotnetcore-sdk
-choco install microsoft-windows-terminal
+choco install visualstudio2019community
 
-REM Configure Git
-git config --global user.name "Henry Senior"
+REM Enable WSL
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+wsl --set-default-version 2
+
+@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1604 -OutFile Ubuntu.appx -UseBasicParsing"
+
+@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "Add-AppxPackage .\Ubuntu.appx"
+
+del Ubuntu.appx
 
 REM Setup PowerShell
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "Install-Module posh-git -Scope CurrentUser"
@@ -44,7 +67,7 @@ REM Setup PowerShell
 del "%HOMEPATH%\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
 copy "%HOMEPATH%\dotfiles\windows\config\Microsoft.PowerShell_profile.ps1" "%HOMEPATH%\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
 
-REM Setup terminal
+REM Setup Windows Terminal
 del "%HOMEPATH%\AppData\Local\Packages\Microsoft.WindowsTerminal*\LocalState\settings.json"
 copy "%HOMEPATH%\dotfiles\windows\config\settings.json" "%HOMEPATH%\AppData\Local\Packages\Microsoft.WindowsTerminal*\LocalState\settings.json"
 
@@ -55,17 +78,6 @@ cd .emacs.d
 git checkout b develop
 git pull -s recursive -X theirs origin develop
 
-
-REM Link to installation pages of thing not in chocolatey
-start https://visualstudio.microsoft.com/
-
-REM Exit message
-echo All done!
-echo
-echo You need to:
-echo     - Install visual studio (Not in chocolatey)
-echo     - Configure menu and taskbar
-echo     - Configure install visual studio
-echo     - Set "dev" environment variable
+echo The scipt will now start WSL so you can set up your user account. Please see the README file for instructions on running the automated WSL setup once your
 pause
-
+WSL
