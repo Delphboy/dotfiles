@@ -71,12 +71,14 @@ REM Setup Windows Terminal
 del "%HOMEPATH%\AppData\Local\Packages\Microsoft.WindowsTerminal*\LocalState\settings.json"
 copy "%HOMEPATH%\dotfiles\windows\config\settings.json" "%HOMEPATH%\AppData\Local\Packages\Microsoft.WindowsTerminal*\LocalState\settings.json"
 
-REM Setup spacemacs
+REM Setup Emacs Doom
 cd %HOMEPATH%
-git clone https://github.com/syl20bnr/spacemacs .emacs.d
+git clone --depth 1 https://github.com/hlissner/doom-emacs .emacs.d
 cd .emacs.d
-git checkout b develop
-git pull -s recursive -X theirs origin develop
+git checkout develop
+cd %HOMEPATH%
+copy dotfiles\.emacs.d\* .emacs.d\
+copy dotfiles\.doom.d\* .doom.d\
 
 echo The scipt will now start WSL so you can set up your user account. Please see the README file for instructions on running the automated WSL setup once your
 pause
