@@ -76,9 +76,12 @@ cd %HOMEPATH%
 git clone --depth 1 https://github.com/hlissner/doom-emacs .emacs.d
 cd .emacs.d
 git checkout develop
+bin\doom install
 cd %HOMEPATH%
-copy dotfiles\.emacs.d\* .emacs.d\
-copy dotfiles\.doom.d\* .doom.d\
+del .doom.d\
+copy dotfiles\.doom.d\config.el .doom.d\config.el
+copy dotfiles\.doom.d\init.el .doom.d\init.el
+copy dotfiles\.doom.d\packages.el .doom.d\packages.el
 
 echo The scipt will now start WSL so you can set up your user account. Please see the README file for instructions on running the automated WSL setup once your
 pause
