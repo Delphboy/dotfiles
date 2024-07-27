@@ -1,0 +1,8 @@
+
+
+# send window to desktop and follow focus
+shift + ctrl - 1 : yabai -m window --space Browser
+shift + ctrl - 2 : yabai -m window --space Code
+shift + ctrl - 3 : yabai -m window --space Terminal
+shift + ctrl - 4 : yabai -m window --space Teams
+shift + ctrl - 5 : yabai -m window --space Spotify
