@@ -7,9 +7,9 @@ fi
 
 
 # If you're using macOS, you'll want this enabled
-# if [[ -f "/opt/homebrew/bin/brew" ]] then
-#   eval "$(/opt/homebrew/bin/brew shellenv)"
-# fi
+if [[ -f "/opt/homebrew/bin/brew" ]] then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
 
 # Set the directory we want to store zinit and plugins
@@ -39,6 +39,7 @@ zinit snippet OMZP::command-not-found
 
 
 zstyle :compinstall filename '/home/henry/.zshrc'
+zstyle :compinstall filename '/Users/henrysenior/.zshrc'
 
 autoload -Uz compinit
 compinit
@@ -46,11 +47,21 @@ compinit
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+sessioniser_script() {
+    # SCRIPT_PATH="~/.scripts/sessioniser.sh"
+    # bash "$SCRIPT_PATH"
+    sessioniser.sh
+}
+
 # Keybindings
 bindkey -e
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
+# bindkey '^p' history-search-backward
+# bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
+zle -N sessioniser_script
+bindkey '^p' sessioniser_script
+
+
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.zsh_history
@@ -73,11 +84,30 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
+fzfkill() {
+  pid=$(ps -ef | sed 1d | fzf -m --ansi --color fg:-1,bg:-1,hl:46,fg+:40,bg+:233,hl+:46 --color prompt:166,border:46 --height 40%  --border=sharp --prompt="➤  " --pointer="➤ " --marker="➤ " | awk '{print $2}')
+
+  if [ "x$pid" != "x" ]
+  then
+    kill -${1:-9} $pid
+  fi
+}
+
 # Aliases
 alias ls='ls --color'
 alias vim='nvim'
 alias c='clear'
-alias cat='batcat'
+alias cat='bat'
+alias trcf='python3 /Users/henrysenior/Documents/git/tmux-remote-connect-fzf/tmux-remote-connect-fzf.py'
+alias connect='kitten ssh'
+
+# Variables
+dev="/Users/henrysenior/Documents/git"
+notes="/Users/henrysenior/Documents/Notes"
+data="/Users/henrysenior/Documents/data"
+# Update system variables
+export PATH=~/.scripts/:$PATH
+export EDITOR=nvim
 
 # Shell integrations
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
