@@ -5,6 +5,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+if [ -z "$TMUX" ]; then
+  exec tmux new-session -A -s workspace
+fi
 
 # If you're using macOS, you'll want this enabled
 if [[ -f "/opt/homebrew/bin/brew" ]] then
@@ -53,13 +56,21 @@ sessioniser_script() {
     sessioniser.sh
 }
 
+tmux_swapper() {
+    # SCRIPT_PATH="~/.scripts/sessioniser.sh"
+    # bash "$SCRIPT_PATH"
+    tmux-swap.sh
+}
+
 # Keybindings
 bindkey -e
 # bindkey '^p' history-search-backward
 # bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
 zle -N sessioniser_script
-bindkey '^p' sessioniser_script
+bindkey '^o' sessioniser_script
+zle -N tmux_swapper
+bindkey '^p' tmux_swapper
 
 
 
