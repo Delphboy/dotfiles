@@ -134,6 +134,17 @@ return {
         },
         -- pylsp = {},
         pyright = {},
+        gopls = {
+          settings = {
+            gopls = {
+              analyses = {
+                unusedparams = true,
+              },
+              staticcheck = true,
+              gofumpt = true,
+            },
+          },
+        },
       }
 
       -- Ensure the servers and tools above are installed
@@ -149,6 +160,7 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {
         'pyright',
         'pylsp',
+        'gopls',
       })
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
