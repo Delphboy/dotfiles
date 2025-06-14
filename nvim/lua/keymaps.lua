@@ -34,6 +34,32 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- Maths Unicode
+vim.keymap.set('i', '\\alpha', 'α', { buffer = true })
+vim.keymap.set('i', '\\beta', 'β', { buffer = true })
+vim.keymap.set('i', '\\gamma', 'γ', { buffer = true })
+vim.keymap.set('i', '\\delta', 'δ', { buffer = true })
+vim.keymap.set('i', '\\epsilon', 'ε', { buffer = true })
+vim.keymap.set('i', '\\zeta', 'ζ', { buffer = true })
+vim.keymap.set('i', '\\eta', 'η', { buffer = true })
+vim.keymap.set('i', '\\theta', 'θ', { buffer = true })
+vim.keymap.set('i', '\\iota', 'ι', { buffer = true })
+vim.keymap.set('i', '\\kappa', 'κ', { buffer = true })
+vim.keymap.set('i', '\\lambda', 'λ', { buffer = true })
+vim.keymap.set('i', '\\mu', 'μ', { buffer = true })
+vim.keymap.set('i', '\\nu', 'ν', { buffer = true })
+vim.keymap.set('i', '\\xi', 'ξ', { buffer = true })
+vim.keymap.set('i', '\\omicron', 'ο', { buffer = true })
+vim.keymap.set('i', '\\pi', 'π', { buffer = true })
+vim.keymap.set('i', '\\rho', 'ρ', { buffer = true })
+vim.keymap.set('i', '\\sigma', 'σ', { buffer = true })
+vim.keymap.set('i', '\\tau', 'τ', { buffer = true })
+vim.keymap.set('i', '\\upsilon', 'υ', { buffer = true })
+vim.keymap.set('i', '\\phi', 'φ', { buffer = true })
+vim.keymap.set('i', '\\chi', 'χ', { buffer = true })
+vim.keymap.set('i', '\\psi', 'ψ', { buffer = true })
+vim.keymap.set('i', '\\omega', 'ω', { buffer = true })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
